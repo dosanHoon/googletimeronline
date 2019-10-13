@@ -1,13 +1,10 @@
-import React,{useState,useCallback,useRef,createRef} from 'react';
-import logo from './logo.svg';
+import React,{useState,useCallback,useRef} from 'react';
 import './App.css';
 import Circle from './components/Circle';
 
 const App: React.FC = () => {
 
   let intervalId:any = useRef(null)
-
-  
 
   const [timer , setTimer] = useState(30)
   const [disabled , setDisabled] = useState(false)
@@ -36,18 +33,16 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <Circle timer={timer}/>
+        <div>
+          <input type="text" onChange={(e)=>{setTimer(Number(e.target.value))}} value={timer} disabled={disabled}/>
+        </div>
         <button onClick={startTimer}>
           시작하기
         </button>
         <button onClick={clear}>
           취소하기
         </button>
-        <Circle timer={timer}/>
-        <div>
-          {/* {timer} */}
-          <input type="text" onChange={(e)=>{setTimer(Number(e.target.value))}} value={timer} disabled={disabled}/>
-        </div>
       </header>
     </div>
   );

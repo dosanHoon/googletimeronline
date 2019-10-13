@@ -2,27 +2,35 @@ import React,{createRef,useEffect} from 'react'
 
 const Circle = ({timer } :any) => {
     let canvasRef:any = createRef()
+
     useEffect(()=>{
+        console.log("timer",timer)
         var canvas : any =  canvasRef.current
-    // console.log("canvas",canvas)
-    // console.log("canvas",canvas.getContext)
-    if (canvas.getContext) {
-        console.log(timer)
-        console.log((Math.PI/180)*timer)
-        var ctx = canvas.getContext('2d');
-        ctx.moveTo(200, 200);
-        ctx.arc(200,200,50,0, (Math.PI/180)*timer, true);
-        ctx.closePath();
-        ctx.stroke();
-        ctx.fillStyle="rgb(255,255,255)"  
-        ctx.fill();  
-    }
+        if (canvas.getContext) {
+            console.log("timer",(Math.PI*2)*(timer/60))
+            var ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, 500, 500);
+
+            ctx.beginPath();
+            ctx.moveTo(250, 250);
+            ctx.arc(250,250,250,0, (Math.PI*2), true);
+            ctx.closePath();
+            ctx.stroke();
+            ctx.fillStyle="rgb(255,255,255)"  
+            ctx.fill();  
+
+            ctx.beginPath();
+            ctx.moveTo(250, 250);
+            ctx.arc(250,250,250,-0.5 * Math.PI, -0.5 *Math.PI + (Math.PI)*2*(timer/60), false);
+            ctx.closePath();
+            ctx.stroke();
+            ctx.fillStyle="rgb(255,0,0)"  
+            ctx.fill();  
+        }
     },[timer])
+
     return (
-        <canvas 
-        width="500" height="500"
-        // style={{background : "white",width:500,height:500}}
-         ref={canvasRef}/>
+        <canvas  width="500" height="500" ref={canvasRef}/>
     )
 }
 
