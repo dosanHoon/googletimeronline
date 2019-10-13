@@ -1,0 +1,16 @@
+{
+  "extends": "react-app",
+  "rules": {
+    "react/jsx-filename-extension": 0,
+    "indent": ["warn", 2],
+    "react/forbid-prop-types": 0,
+    "no-underscore-dangle": 0,
+    "no-alert": 0,
+    "semi": 0,
+    "jsx-a11y/anchor-is-valid": "off"
+  },
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true
+  }
+}
