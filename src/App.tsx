@@ -6,18 +6,22 @@ const App: React.FC = () => {
   let intervalId: any = useRef(null)
 
   const [timer, setTimer]: [number, Function] = useState(30)
+  const [isStart, setIsStart]: [boolean, Function] = useState(false)
   const [disabled, setDisabled] = useState(false)
 
   const clear = useCallback(() => {
     setDisabled(false)
+    setIsStart(false)
+    setTimer(0)
     clearInterval(intervalId.current)
   }, [intervalId.current])
 
   const startTimer = useCallback(() => {
     setDisabled(true)
+    setIsStart(true)
     let time = timer
     intervalId.current = setInterval(() => {
-      if (time > 0) {
+      if (time >= 0) {
         setTimer(--time)
       } else {
         clear()
@@ -29,14 +33,14 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <Circle timer={timer} width={500} height={500} />
+        <Circle timer={timer} width={500} height={500} isStart={isStart} setTimer={setTimer} />
         <div>
           <input
             type="text"
             onChange={e => {
               setTimer(Number(e.target.value))
             }}
-            value={timer}
+            value={Math.round(timer)}
             disabled={disabled}
           />
         </div>
